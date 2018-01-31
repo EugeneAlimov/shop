@@ -1,0 +1,185 @@
+{% load static %}
+
+<!-- Bootstrap CSS -->
+<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">-->
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!--<link rel="stylesheet" href="{% static 'css/bootstrap-grid.min.css' %}">-->
+<!-- Custom styles -->
+<!--<link rel="stylesheet" href="{% static 'css/management_navbar.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal_window_style.css' %}">
+
+<body>
+
+<!--------------------------------------------Navbar---------------------------------------->
+<div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Управление товарами</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}"> Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link open_modal" href="#add_goods" name="modal" id="f">Добавить товар</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link open_modal" href="#add_category">Добавить категорию</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<!--**********************************Модальное окно****************************************-->
+
+
+<div id="add_goods" class="modal_div">
+    Форма добавления товара
+    <!-- скрытый див с уникaльным id = modal1 -->
+    <span class="modal_close">Закрыть форму</span>
+    <!-- тут вaш кoд -->
+    <form id="form-goods-adding" action="{% url 'item' %}" method="post">{% csrf_token %}
+        <div class="input-group mb-3" id="name-of-product">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="name_of_goods">Наименование товара</span>
+            </div>
+            <input type="text" required class="form-control" name="name_of_goods" form="form-goods-adding"
+                   placeholder="Введите наименование">
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+
+                <input type="number" class="form-control" name="price" placeholder="Цена..." form="form-goods-adding">
+                <div class="input-group-append">
+                    <div>
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" id="currency">Валюта
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">ГРН</a>
+                            <a class="dropdown-item" href="#">USD</a>
+                            <a class="dropdown-item" href="#">EUR</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+
+                    <span class="input-group-text">за</span>
+                    <div>
+                        <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" id="quantity">Количество
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">ШТ</a>
+                            <a class="dropdown-item" href="#">Упаковку</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile">
+                <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Добавить</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" id="submit_btn" class="btn btn-success btn-by">
+                <!--data-product_id="{{ product.id }}"-->
+                <!--data-name="{{ product.name }}"-->
+                <!--data-price="{{ product.price }}"-->
+                <!--&gt;-->
+                Загрузить товар
+            </button>
+        </div>
+    </form>
+
+</div>
+
+
+<div id="add_category" class="modal_div">
+    Форма добавления категории <!-- скрытый див с уникaльным id = modal1 -->
+    <span class="modal_close">Закрыть форму</span>
+    <!-- тут вaш кoд -->
+    <div class="input-group mb-3" id="name-of-category">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Наименование товара</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Введите наименование" aria-label="Username"
+               aria-describedby="basic-addon1">
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+
+            <input type="number" class="form-control" placeholder="Цена..."
+                   aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <div>
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" id="currency1">Валюта
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">ГРН</a>
+                        <a class="dropdown-item" href="#">USD</a>
+                        <a class="dropdown-item" href="#">EUR</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
+
+                <span class="input-group-text">за</span>
+                <div>
+                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" id="quantity1">Количество
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">ШТ</a>
+                        <a class="dropdown-item" href="#">Упаковку</a>
+                        <div role="separator" class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile1">
+            <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Добавить</button>
+        </div>
+    </div>
+
+</div>
+
+<div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
+
+<!--**********************************Конец модального окна****************************************-->
+
+</body>
+<!--<script src="{% static 'jquery-3.3.1.min.js' %}"></script>-->
+<!--<script src="{% static 'jquery-3.3.1.slim.min.js' %}"></script>-->
+<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
