@@ -20,7 +20,19 @@ def goods_adding(request):
     return JsonResponse(return_dict)
 
 
-
 def management(request):
     print('Ololo xyi')
     return render(request, 'management/management.html')
+
+
+def category_adding(request):
+    return_dict = dict()
+    print(request.POST)
+    data = request.POST
+    name_of_category = data.get('category_name')
+
+    uio = ProductCategory(name_of_category=category_name)
+
+    uio.save()
+
+    return JsonResponse(return_dict)

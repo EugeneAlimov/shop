@@ -45,9 +45,9 @@
 
 
 <div id="add_goods" class="modal_div">
-    Форма добавления товара
+    <h4>Форма добавления товара</h4>
     <!-- скрытый див с уникaльным id = modal1 -->
-    <span class="modal_close">Закрыть форму</span>
+    <span class="modal_close"><h4>Закрыть форму</h4></span>
     <!-- тут вaш кoд -->
     <form id="form-goods-adding" action="{% url 'goods_adding' %}" method="post">{% csrf_token %}
         <div class="input-group mb-3" id="name-of-product">
@@ -55,7 +55,7 @@
                 <span class="input-group-text" id="name_of_goods">Наименование товара</span>
             </div>
             <input type="text" required class="form-control" name="name_of_goods" form="form-goods-adding"
-                   placeholder="Введите наименование">
+                   placeholder="Введите наименование...">
         </div>
         <div class="form-group">
             <div class="input-group">
@@ -91,17 +91,31 @@
             </div>
         </div>
 
-        <div class="input-group">
+        <div class="input-group description">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 178px;"> Описание товара </span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div>
+
+
+        <div class="input-group description">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 178px;">Краткое описание</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div>
+
+        <div class="input-group description">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile">
-                <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
+                <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл...</label>
             </div>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Добавить</button>
-            </div>
+
         </div>
+
         <div class="form-group">
-            <button type="submit" id="submit_btn" class="btn btn-success btn-by">
+            <button type="submit" id="submit_btn_goods" class="btn btn-success btn-by">
                 <!--data-product_id="{{ product.id }}"-->
                 <!--data-name="{{ product.name }}"-->
                 <!--data-price="{{ product.price }}"-->
@@ -109,66 +123,52 @@
                 Загрузить товар
             </button>
         </div>
-    </form>
+
+
+        </form>
 
 </div>
 
 
 <div id="add_category" class="modal_div">
-    Форма добавления категории <!-- скрытый див с уникaльным id = modal1 -->
-    <span class="modal_close">Закрыть форму</span>
+    <h4>Форма добавления категории</h4> <!-- скрытый див с уникaльным id = modal1 -->
+    <span class="modal_close"><h4>Закрыть форму</h4></span>
     <!-- тут вaш кoд -->
+    <form id="form-category-adding" action="{% url 'category_adding' %}" method="post">{% csrf_token %}
     <div class="input-group mb-3" id="name-of-category">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Наименование товара</span>
+            <span class="input-group-text" id="basic-addon1">Наименование категории</span>
         </div>
-        <input type="text" class="form-control" placeholder="Введите наименование" aria-label="Username"
+
+        <input type="text" class="form-control" name="category_name" placeholder="Введите категорию..."
+               aria-label="Username"
                aria-describedby="basic-addon1">
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-
-            <input type="number" class="form-control" placeholder="Цена..."
-                   aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <div>
-                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" id="currency1">Валюта
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">ГРН</a>
-                        <a class="dropdown-item" href="#">USD</a>
-                        <a class="dropdown-item" href="#">EUR</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div>
-
-                <span class="input-group-text">за</span>
-                <div>
-                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" id="quantity1">Количество
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">ШТ</a>
-                        <a class="dropdown-item" href="#">Упаковку</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div>
+        <div class="input-group description">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 190px;">Описание категории</span>
             </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
         </div>
-    </div>
 
-    <div class="input-group">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile1">
-            <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
+        <div class="input-group description">
+            <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 190px;">Краткое описание</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
         </div>
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Добавить</button>
+
+        <div class="form-group">
+            <button type="submit" id="submit_btn_category" class="btn btn-success btn-by">
+                <!--data-product_id="{{ product.id }}"-->
+                <!--data-name="{{ product.name }}"-->
+                <!--data-price="{{ product.price }}"-->
+                <!--&gt;-->
+                Загрузить категорию
+            </button>
         </div>
     </div>
+    </form>
+
 
 </div>
 

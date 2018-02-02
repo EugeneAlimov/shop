@@ -15,6 +15,12 @@
     border: 1px solid #6c757d;
 }
 
+.description{
+    border: 1px solid #6c757d;
+    margin-top: 12px;
+    border-radius: 5px;
+}
+
 .form-control{
     border: 1px solid #6c757d;
 }
@@ -147,10 +153,10 @@ a:hover {
 
 /* Кнoпкa зaкрыть для тех ктo в тaнке) */
 .modal_close {
-    width: 129px;
+    width: 205px;
     height: 20px;
     position: absolute;
-    top: 12px;
+    top: 21px;
     right: 7px;
     cursor: pointer;
     display: block;
@@ -170,4 +176,9 @@ a:hover {
 	left:0;
 	cursor:pointer;
 	display:none; /* в oбычнoм сoстoянии её нет) */
+}
+
+.btn-by{
+    background-color: #374048;
+    border-color: #000000;
 }

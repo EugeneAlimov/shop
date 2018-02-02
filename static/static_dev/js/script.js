@@ -135,3 +135,28 @@ $(document).on('submit', '#form-goods-adding', function(e){
     
 })
 
+
+$(document).on('submit', '#form-category-adding', function(e){
+    e.preventDefault();
+    var form = $('#form-category-adding');
+    var url = form.attr("action");
+    var data = $('#form-category-adding').serialize();
+//     data.csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: data,
+    })
+    .done(function() {
+        console.log("success");
+        console.log(data);
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+
+    });
+
+})
+
