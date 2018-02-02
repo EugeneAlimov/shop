@@ -110,6 +110,7 @@ e.preventDefault();
 
 //-----------Конец анимации корзины----------------
 
+
 $(document).on('submit', '#form-goods-adding', function(e){
     e.preventDefault();
     var form = $('#form-goods-adding');

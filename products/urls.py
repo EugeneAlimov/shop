@@ -18,6 +18,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('management/', views.goods_adding, name='goods_adding'),
-    path('item/', views.item, name='item'),
+
+    # path('item/', views.item, name='item'),
 ]

@@ -49,7 +49,7 @@
     <!-- скрытый див с уникaльным id = modal1 -->
     <span class="modal_close">Закрыть форму</span>
     <!-- тут вaш кoд -->
-    <form id="form-goods-adding" action="{% url 'item' %}" method="post">{% csrf_token %}
+    <form id="form-goods-adding" action="{% url 'goods_adding' %}" method="post">{% csrf_token %}
         <div class="input-group mb-3" id="name-of-product">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="name_of_goods">Наименование товара</span>
