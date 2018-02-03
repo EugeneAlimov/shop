@@ -155,7 +155,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'home' %}"> Главная </a></li>
                 <li class=" "><a href="management"> New </a></li>
-
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin"> Админ <span class="sr-only">(current)</span></a>
+                </li>
                 <!-- change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width -->
                 <li class="dropdown megamenu-fullwidth "><a data-toggle="dropdown" class="dropdown-toggle" href="#">
                     Browse
@@ -303,11 +305,11 @@
                                         <div class="cart-items">
                                             <ul class="">
                                                 {% for product_in_cart in products_in_cart %}
-                                                <li>{{ product_in_cart.product.name }} {{ product_in_cart.nmb }} шт.
-                                                    по {{ product_in_cart.price_per_item }} грн.
-                                                    <a class="delete-item" href=""
-                                                       data-product_id="{{ product_in_cart.id }}">x</a>
-                                                </li>
+                                                    <li>{{ product_in_cart.product.name }} {{ product_in_cart.nmb }} шт.
+                                                        по {{ product_in_cart.price_per_item }} грн.
+                                                        <a class="delete-item" href=""
+                                                           data-product_id="{{ product_in_cart.id }}">x</a>
+                                                    </li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
