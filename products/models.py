@@ -34,7 +34,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, default=None, verbose_name='Описание')
     short_description = models.TextField(blank=True, null=True, default=None, verbose_name='Краткое описание')
     in_stock = models.BooleanField(default=True, verbose_name='В наличии')
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Цена')
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=True, verbose_name='Цена')
     discount = models.IntegerField(default=0, verbose_name='Скидка')
     created = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Создан')
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Обновлен')
