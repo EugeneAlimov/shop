@@ -27,11 +27,12 @@
                     <a class="nav-link" href="{% url 'home' %}"> Главная <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link open_modal" href="#add_goods" name="modal" id="f">Добавить товар</a>
+                    <a class="nav-link open_modal" href="#add_goods">Добавить товар</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link open_modal" href="#add_category">Добавить категорию</a>
                 </li>
+
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -45,9 +46,9 @@
 
 
 <div id="add_goods" class="modal_div">
-    <h4>Форма добавления товара</h4>
+    Форма добавления товара
     <!-- скрытый див с уникaльным id = modal1 -->
-    <span class="modal_close"><h4>Закрыть форму</h4></span>
+    <span class="modal_close">Закрыть форму</span>
     <!-- тут вaш кoд -->
     <form id="form-goods-adding" action="{% url 'goods_adding' %}" method="post">{% csrf_token %}
         <div class="input-group mb-3" id="name-of-product">
@@ -55,7 +56,20 @@
                 <span class="input-group-text" id="name_of_goods">Наименование товара</span>
             </div>
             <input type="text" required class="form-control" name="name_of_goods" form="form-goods-adding"
-                   placeholder="Введите наименование...">
+                   placeholder="Введите наименование">
+            <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" id="category">Категория
+            </button>
+            <div class="dropdown-menu" id="category_drop">
+                <a class="dropdown-item" href="#">
+                    {% for category in name_category_list %}
+                    <a class="dropdown-item" id="category_menu_drop" href="#">
+                        {{ category.name_of_category }}
+                    </a>
+                    {% endfor %}
+                </a>
+            </div>
+
         </div>
         <div class="form-group">
             <div class="input-group">
@@ -66,12 +80,11 @@
                         <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" id="currency">Валюта
                         </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">ГРН</a>
-                            <a class="dropdown-item" href="#">USD</a>
-                            <a class="dropdown-item" href="#">EUR</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
+                        <div class="dropdown-menu currency" id="currensy_drop">
+                            <a class="dropdown-item" id="UAH" href="#">ГРН</a>
+                            <a class="dropdown-item" id="USD" href="#">USD</a>
+                            <a class="dropdown-item" id="EUR" href="#">EUR</a>
+                            <a class="dropdown-item" id="RUB" href="#">РУБ</a>
                         </div>
                     </div>
 
@@ -80,11 +93,9 @@
                         <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" id="quantity">Количество
                         </button>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="quantity_drop">
                             <a class="dropdown-item" href="#">ШТ</a>
                             <a class="dropdown-item" href="#">Упаковку</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                     </div>
                 </div>
@@ -93,83 +104,68 @@
 
         <div class="input-group description">
             <div class="input-group-prepend">
-                <span class="input-group-text" style="width: 178px;"> Описание товара </span>
+                <span class="input-group-text descript">Описание товара</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <textarea class="form-control" name="goods_description" aria-label="With textarea"></textarea>
         </div>
-
 
         <div class="input-group description">
             <div class="input-group-prepend">
-                <span class="input-group-text" style="width: 178px;">Краткое описание</span>
+                <span class="input-group-text descript">Краткое описание</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <textarea class="form-control" name="goods_short_description" aria-label="With textarea"></textarea>
         </div>
 
         <div class="input-group description">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile">
-                <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл...</label>
+                <input type="file" class="custom-file-input" name="image" id="inputGroupFile">
+                <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
             </div>
-
         </div>
 
         <div class="form-group">
-            <button type="submit" id="submit_btn_goods" class="btn btn-success btn-by">
-                <!--data-product_id="{{ product.id }}"-->
-                <!--data-name="{{ product.name }}"-->
-                <!--data-price="{{ product.price }}"-->
-                <!--&gt;-->
+            <button type="submit" id="submit_btn_product" class="btn btn-success btn-by">
                 Загрузить товар
             </button>
         </div>
-
-
-        </form>
-
+    </form>
 </div>
 
 
 <div id="add_category" class="modal_div">
-    <h4>Форма добавления категории</h4> <!-- скрытый див с уникaльным id = modal1 -->
-    <span class="modal_close"><h4>Закрыть форму</h4></span>
+    Форма добавления категории <!-- скрытый див с уникaльным id = modal1 -->
+    <span class="modal_close">Закрыть форму</span>
     <!-- тут вaш кoд -->
     <form id="form-category-adding" action="{% url 'category_adding' %}" method="post">{% csrf_token %}
-    <div class="input-group mb-3" id="name-of-category">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Наименование категории</span>
-        </div>
-
-        <input type="text" class="form-control" name="category_name" placeholder="Введите категорию..."
-               aria-label="Username"
-               aria-describedby="basic-addon1">
-        <div class="input-group description">
+        <div class="input-group mb-3" id="name-of-category">
             <div class="input-group-prepend">
-                <span class="input-group-text" style="width: 190px;">Описание категории</span>
+                <span class="input-group-text" id="basic-addon1">Наименование категории</span>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
+            <input type="text" class="form-control" name="name_of_category" placeholder="Введите наименование..."
+                   aria-label="Username"
+                   aria-describedby="basic-addon1">
 
-        <div class="input-group description">
-            <div class="input-group-prepend">
-                <span class="input-group-text" style="width: 190px;">Краткое описание</span>
+            <div class="input-group description">
+                <div class="input-group-prepend">
+                    <span class="input-group-text descript">Описание категории</span>
+                </div>
+                <textarea class="form-control" name="category_description" aria-label="With textarea"></textarea>
             </div>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
 
-        <div class="form-group">
-            <button type="submit" id="submit_btn_category" class="btn btn-success btn-by">
-                <!--data-product_id="{{ product.id }}"-->
-                <!--data-name="{{ product.name }}"-->
-                <!--data-price="{{ product.price }}"-->
-                <!--&gt;-->
-                Загрузить категорию
-            </button>
+            <div class="input-group description">
+                <div class="input-group-prepend">
+                    <span class="input-group-text descript">Краткое описание</span>
+                </div>
+                <textarea class="form-control" name="category_short_description" aria-label="With textarea"></textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="submit_btn_category" class="btn">
+                    Загрузить категорию
+                </button>
+            </div>
         </div>
-    </div>
     </form>
-
-
 </div>
 
 <div id="overlay"></div><!-- Пoдлoжкa, oднa нa всю стрaницу -->
@@ -177,8 +173,6 @@
 <!--**********************************Конец модального окна****************************************-->
 
 </body>
-<!--<script src="{% static 'jquery-3.3.1.min.js' %}"></script>-->
-<!--<script src="{% static 'jquery-3.3.1.slim.min.js' %}"></script>-->
 <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
