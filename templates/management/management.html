@@ -57,17 +57,18 @@
             </div>
             <input type="text" required class="form-control" name="name_of_goods" form="form-goods-adding"
                    placeholder="Введите наименование">
-            <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" id="category">Категория
-            </button>
-            <div class="dropdown-menu" id="category_drop">
-                <a class="dropdown-item" href="#">
+            <div>
+                <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" id="category">Категория
+                </button>
+
+                <div class="dropdown-menu" id="category_drop">
                     {% for category in name_category_list %}
-                    <a class="dropdown-item" id="category_menu_drop" href="#">
-                        {{ category.name_of_category }}
-                    </a>
+                        <a class="dropdown-item" href="#">
+                            {{ category.name_of_category }}
+                        </a>
                     {% endfor %}
-                </a>
+                </div>
             </div>
 
         </div>

@@ -64,7 +64,7 @@
 
 //});
 
-//---------------Всплывающее окно------------------------
+//---------------Всплывающее окно------------------------//
 
 $(document).ready(function () { // зaпускaем скрипт пoсле зaгрузки всех элементoв
     /* зaсунем срaзу все элементы в переменные, чтoбы скрипту не прихoдилoсь их кaждый рaз искaть при кликaх */
@@ -95,9 +95,9 @@ $(document).ready(function () { // зaпускaем скрипт пoсле зaг
     });
 });
 
-//----------Конец всплывающего окна------------------
+//----------Конец всплывающего окна------------------//
 
-//-------------Анимация корзины------------------
+//-------------Анимация корзины------------------//
 $('.window .close').click(function (e) {
     e.preventDefault();
     $('#mask, .window').hide();
@@ -108,9 +108,9 @@ $('#mask').click(function () {
     $('.window').hide();
 });
 
-//-----------Конец анимации корзины----------------
+//-----------Конец анимации корзины----------------//
 
-//-------------------POST---------------------
+//-------------------POST---------------------//
 
 $(document).on('submit', '#form-goods-adding', function (e) {
     e.preventDefault();
@@ -167,8 +167,8 @@ $(document).on('submit', '#form-category-adding', function (e) {
 
 $(function(){
     $("#category_drop a").click(function(){
-        $("#category_menu_drop:first-child").text($(this).text());
-        $("#category_menu_drop:first-child").val($(this).text());
+        $("#category:first-child").text($(this).text());
+        $("#category:first-child").val($(this).text());
     });
 });
 
@@ -185,5 +185,3 @@ $(function(){
         $("#quantity:first-child").val($(this).text());
     });
 });
-
-
