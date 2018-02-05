@@ -39,6 +39,9 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Создан')
     updated = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Обновлен')
 
+    def __str__(self):
+        return "%s" % self.name_of_product
+
     class Meta:
         verbose_name = 'Продукция'
         verbose_name_plural = 'Продукция'
@@ -60,3 +63,21 @@ class Status(models.Model):
     class Meta:
         verbose_name = 'Отображать'
         verbose_name_plural = 'Отображать'
+
+
+class Image(models.Model):
+    name_of_product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, default=None,
+                                        verbose_name='Наименование товара')
+    product_image = models.ImageField(verbose_name='Изображение', upload_to='static/media/goods_image')
+    is_main = models.BooleanField(default=False, verbose_name='Основное')
+    is_active = models.BooleanField(default=True, verbose_name='Активное')
+    created = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Добавлено')
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Обновлено')
+
+    def __str__(self):
+        return "%s" % self.product_image
+
+    class Meta:
+        verbose_name = 'Изображение товара'
+        verbose_name_plural = 'Изображения товаров'
+

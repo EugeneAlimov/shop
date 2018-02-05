@@ -24,3 +24,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
+
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Image._meta.fields]
+    list_display_links = ['product_image']
+
+
+admin.site.register(Image, ImageAdmin)

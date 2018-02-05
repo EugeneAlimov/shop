@@ -18,7 +18,7 @@ def goods_adding(request):
     image = data.get('image')
 
     dsg = Product(name_of_product=name_of_goods, price=price, short_description=goods_short_description,
-                  description=goods_description, )
+                  description=goods_description, product_image=image)
 
     dsg.save()
     return JsonResponse(return_dict)
