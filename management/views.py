@@ -1,26 +1,43 @@
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
-# from products.forms import MyForm
-
+from django.shortcuts import render, redirect
+from products.forms import UploadFileForm
+from django.core.files.storage import FileSystemStorage
 from products.models import *
 
 
-# Create your views here.
+# def goods_adding(request):
+#     print('sda')
+#     if request.method == 'POST' and request.FILES['image']:
+#         form = UploadFileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+
+# Create
+# your
+# views
+# here.
+
+
 def goods_adding(request):
     print("form good adding !!!!!!!!!")
     return_dict = dict()
     data = request.POST
-
+    # image = request.FILES
     name_of_goods = data.get('name_of_goods')
     price = data.get('price')
     goods_description = data.get('goods_description')
     goods_short_description = data.get('goods_short_description')
-    image = data.get('image')
 
     dsg = Product(name_of_product=name_of_goods, price=price, short_description=goods_short_description,
-                  description=goods_description, product_image=image)
-
+                  description=goods_description)
+    # www = Product(product_image_name=image)
+    # print(image)
+    print(price)
+    print(name_of_goods)
     dsg.save()
+    # # www.save()
+
     return JsonResponse(return_dict)
 
 
@@ -37,6 +54,7 @@ def category_adding(request):
     qqq.save()
 
     print("form category adding !!!!!!!!!")
+
     return JsonResponse(return_dict)
 
 

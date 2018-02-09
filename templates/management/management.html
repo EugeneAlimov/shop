@@ -50,13 +50,12 @@
     <!-- скрытый див с уникaльным id = modal1 -->
     <span class="modal_close">Закрыть форму</span>
     <!-- тут вaш кoд -->
-    <form id="form-goods-adding" action="{% url 'goods_adding' %}" method="post">{% csrf_token %}
+    <form id="form-goods-adding" enctype="multipart/form-data" action="{% url 'goods_adding' %}" method="post">{% csrf_token %}
         <div class="input-group mb-3" id="name-of-product">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="name_of_goods">Наименование товара</span>
             </div>
-            <input type="text" required class="form-control" name="name_of_goods" form="form-goods-adding"
-                   placeholder="Введите наименование">
+            <input required class="form-control" name="name_of_goods" placeholder="Введите наименование">
             <div>
                 <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" id="category">Категория
@@ -75,7 +74,7 @@
         <div class="form-group">
             <div class="input-group">
 
-                <input type="number" class="form-control" name="price" placeholder="Цена..." form="form-goods-adding">
+                <input class="form-control" name="price" placeholder="Цена...">
                 <div class="input-group-append">
                     <div>
                         <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
@@ -119,7 +118,7 @@
 
         <div class="input-group description">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" name="image" id="inputGroupFile">
+                <input type="file" enctype="multipart/form-data" class="custom-file-input" name="image" id="inputGroupFile">
                 <label class="custom-file-label" for="inputGroupFile04">Добавить фото. Выберите файл</label>
             </div>
         </div>
