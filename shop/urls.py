@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('products/', include('products.urls')),
-    path('cart/', include('cart.urls')),
-    path('management/', include('management.urls')),
-    path('ttt/', include('ttt.urls')),
-]
+                  path('admin/', admin.site.urls),
+                  path('', include('home.urls')),
+                  path('products/', include('products.urls')),
+                  path('cart/', include('cart.urls')),
+                  path('management/', include('management.urls')),
+                  path('ttt/', include('ttt.urls')),
+              ] \
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

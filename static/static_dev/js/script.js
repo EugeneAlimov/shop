@@ -113,41 +113,19 @@ $('#mask').click(function () {
 //-------------------POST---------------------//
 
 $(document).on('submit', '#form-goods-adding', function (e) {
-   e.preventDefault();
-   var formData = new FormData();
-   var form = $('#form-goods-adding');
-   var url = form.attr("action");
-   formData.append('section', 'general');
-   formData.append('action', 'previewImg');
-   formData.append('image', $('input[type=file]')[0].files[0]);
-
-   $.ajax({
-      url: url,
-       data: formData,
-       type: 'POST',
-       contentType: false,
-       processData: false
-   })
-   .done(function () {
-            console.log("success");
-            console.log(data);
-            $('#form-goods-adding')[0].reset();
-        })
-});
-
-
-
-$(document).on('submit', '#form-goods-adding', function (e) {
     e.preventDefault();
-    // var form = new FormData($('form').get(0));
-    var form = $('#form-goods-adding');
-    var url = form.attr("action");
-    var data = $('#form-goods-adding').serialize();
-//     data.csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+    var formData = new FormData($('#form-goods-adding')[0]);
+    var csrf_token = $('#form-goods-adding [name="csrfmiddlewaretoken"]').val();
+    formData.csrfmiddlewaretoken = csrf_token;
+    var url = $('#form-goods-adding').attr("action");
+    console.log(csrf_token);
+
     $.ajax({
         url: url,
+        data: formData,
         type: 'POST',
-        data: data
+        contentType: false,
+        processData: false,
     })
         .done(function () {
             console.log("success");
@@ -155,11 +133,35 @@ $(document).on('submit', '#form-goods-adding', function (e) {
         })
         .fail(function () {
             console.log("error");
+            console.log(formData);
         })
         .always(function () {
-
         });
 });
+
+
+
+//$(document).on('submit', '#form-goods-adding', function (e) {
+//    e.preventDefault();
+//    var form = $('#form-goods-adding');
+//    var url = form.attr("action");
+//    var data = $('#form-goods-adding').serialize();
+//    $.ajax({
+//        url: url,
+//        type: 'POST',
+//        data: data
+//    })
+//        .done(function () {
+//            console.log("success");
+//            $('#form-goods-adding')[0].reset();
+//        })
+//        .fail(function () {
+//            console.log("error");
+//        })
+//        .always(function () {
+//
+//        });
+//});
 
 
 

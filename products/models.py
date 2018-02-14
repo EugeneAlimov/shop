@@ -66,11 +66,12 @@ class Status(models.Model):
 
 
 class Image(models.Model):
+    name_of_product_image = models.CharField(max_length=64, blank=True, null=True, default=None,
+                                             verbose_name='Наименование изображения товара')
     name_of_product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, default=None,
                                         verbose_name='Наименование товара')
-    product_image_name = models.CharField(max_length=64, blank=True, null=True, default=None,
-                                          verbose_name='Наименование изображения')
-    product_image = models.FileField(verbose_name='Изображение', upload_to='static/media/goods_image')
+
+    product_image = models.ImageField(verbose_name='Изображение', upload_to='static/media/goods_images')
     is_main = models.BooleanField(default=False, verbose_name='Основное')
     is_active = models.BooleanField(default=True, verbose_name='Активное')
     created = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Добавлено')
