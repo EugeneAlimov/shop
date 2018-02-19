@@ -10,7 +10,6 @@ from products.models import *
 
 # @csrf_exempt
 def goods_adding(request):
-
     form = UploadImageForm(request.POST, request.FILES)
     if form.is_valid():
         print('Есть форма')
@@ -18,7 +17,7 @@ def goods_adding(request):
     else:
         print('Пусто')
 
-    return_dict = dict()
+    # return_dict = dict()
     data = request.POST
     print(data)
 
@@ -26,16 +25,19 @@ def goods_adding(request):
     price = data.get('price')
     goods_description = data.get('goods_description')
     goods_short_description = data.get('goods_short_description')
-    choice_category = data.get('choice_category')
+    choice_category = data.get('category')
     dsg = Product(name_of_product=name_of_goods, price=price, short_description=goods_short_description,
-                  description=goods_description, category=choice_category)
-    # print(name_of_goods)
+                  description=goods_description)
+    wqw = ProductCategory(name_of_category=choice_category)
+
+    print(choice_category)
     # print(price)
     # print(goods_description)
     # print(goods_short_description)
 
     dsg.save()
-    return JsonResponse(return_dict)
+    wqw.save()
+    return JsonResponse(data)
 
 
 def category_adding(request):

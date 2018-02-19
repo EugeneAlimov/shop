@@ -115,17 +115,18 @@ $('#mask').click(function () {
 $(document).on('submit', '#form-goods-adding', function (e) {
     e.preventDefault();
     var formData = new FormData($('#form-goods-adding')[0]);
-    var csrf_token = $('#form-goods-adding [name="csrfmiddlewaretoken"]').val();
-    formData.csrfmiddlewaretoken = csrf_token;
+    var category = $("#category").val();
+    formData.append("category", category);
     var url = $('#form-goods-adding').attr("action");
-    console.log(csrf_token);
+
+    console.log(formData);
 
     $.ajax({
         url: url,
         data: formData,
         type: 'POST',
         contentType: false,
-        processData: false,
+        processData: false
     })
         .done(function () {
             console.log("success");

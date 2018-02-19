@@ -50,25 +50,21 @@
     <!-- скрытый див с уникaльным id = modal1 -->
     <span class="modal_close">Закрыть форму</span>
     <!-- тут вaш кoд -->
-    <form id="form-goods-adding" enctype="multipart/form-data" action="{% url 'goods_adding' %}" method="post">{%
-        csrf_token %}
+    <form id="form-goods-adding" enctype="multipart/form-data" action="{% url 'goods_adding' %}"
+          method="post">{% csrf_token %}
         <div class="input-group mb-3" id="name-of-product">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="name_of_goods">Наименование товара</span>
             </div>
             <input type="text" class="form-control" name="name_of_goods" form="form-goods-adding"
                    placeholder="Введите наименование">
+
             <div>
                 <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" id="category">Категория
-                </button>
-
+                        aria-haspopup="true" aria-expanded="false" id="category">Категория</button>
                 <div class="dropdown-menu" id="category_drop">
                     {% for category in name_category_list %}
-                    <a class="dropdown-item" name="choice_category" href="#">
-                        {{ category.name_of_category }}
-                        <input type="text" name="choice_category" hidden>
-                    </a>
+                        <a class="dropdown-item">{{ category.name_of_category }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -122,7 +118,7 @@
         <div class="input-group description">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" multiple name="product_image" id="inputGroupFile">
-                <!--<input type="text" name="name_of_product_image" form="form-goods-adding" hidden>-->
+{#                <input type="text" name="name_of_product_image" form="form-goods-adding" hidden>#}
                 <label class="custom-file-label">Добавить фото. Выберите файл</label>
             </div>
         </div>
