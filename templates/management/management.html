@@ -80,10 +80,9 @@
                                 aria-haspopup="true" aria-expanded="false" id="currency">Валюта
                         </button>
                         <div class="dropdown-menu currency" id="currensy_drop">
-                            <a class="dropdown-item" id="UAH" href="#">ГРН</a>
-                            <a class="dropdown-item" id="USD" href="#">USD</a>
-                            <a class="dropdown-item" id="EUR" href="#">EUR</a>
-                            <a class="dropdown-item" id="RUB" href="#">РУБ</a>
+                            {% for currency in name_currency_list %}
+                                <a class="dropdown-item">{{ currency.currency }}</a>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -93,8 +92,9 @@
                                 aria-haspopup="true" aria-expanded="false" id="quantity">Количество
                         </button>
                         <div class="dropdown-menu" id="quantity_drop">
-                            <a class="dropdown-item" href="#">ШТ</a>
-                            <a class="dropdown-item" href="#">Упаковку</a>
+                            {% for quantity in rate_of_loss_list %}
+                            <a class="dropdown-item">{{ quantity.quantity }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -117,17 +117,21 @@
 
         <div class="input-group description">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" multiple name="product_image" id="inputGroupFile">
-{#                <input type="text" name="name_of_product_image" form="form-goods-adding" hidden>#}
+                <input type="file" class="custom-file-input" multiple name="product_image" id="inputGroupFile" onchange="previewFile()">
+
+                <input type="text" name="name_of_product_image" form="form-goods-adding" hidden>
                 <label class="custom-file-label">Добавить фото. Выберите файл</label>
             </div>
         </div>
-
+        <br>
+        <img src="" height="150">
         <div class="form-group">
             <button type="submit" id="submit_btn_product" class="btn btn-success btn-by">
                 Загрузить товар
             </button>
+            <button onclick="abortRead();">Cancel read</button>
         </div>
+        <div id="progress_bar"><div class="percent">0%</div></div>
     </form>
 </div>
 

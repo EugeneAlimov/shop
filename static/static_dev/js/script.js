@@ -114,9 +114,17 @@ $('#mask').click(function () {
 
 $(document).on('submit', '#form-goods-adding', function (e) {
     e.preventDefault();
+
     var formData = new FormData($('#form-goods-adding')[0]);
-    var category = $("#category").val();
-    formData.append("category", category);
+    console.log($('#form-goods-adding')[0])
+//    var category = $("#category").val();
+//    formData.append("category", category);
+//    var category = $("#currency").val();
+//    formData.append("currency", category);
+//    var category = $("#quantity").val();
+//    formData.append("quantity", category);
+
+
     var url = $('#form-goods-adding').attr("action");
 
     console.log(formData);
@@ -131,6 +139,7 @@ $(document).on('submit', '#form-goods-adding', function (e) {
         .done(function () {
             console.log("success");
             $('#form-goods-adding')[0].reset();
+
         })
         .fail(function () {
             console.log("error");
@@ -214,3 +223,21 @@ $(function () {
         $("#quantity:first-child").val($(this).text());
     });
 });
+
+
+
+//function previewFile() {
+//  var preview = document.querySelector('img');
+//  var file    = document.querySelector('input[type=file]').files[0];
+//  var reader  = new FileReader();
+//
+//  reader.onloadend = function () {
+//    preview.src = reader.result;
+//  }
+//
+//  if (file) {
+//    reader.readAsDataURL(file);
+//  } else {
+//    preview.src = "";
+//  }
+//}
