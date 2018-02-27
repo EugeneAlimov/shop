@@ -32,3 +32,17 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Image, ImageAdmin)
+
+
+class QuantityAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Quantity._meta.fields]
+
+
+admin.site.register(Quantity, QuantityAdmin)
+
+
+class CurrencyAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Currency._meta.fields]
+
+
+admin.site.register(Currency, CurrencyAdmin)
