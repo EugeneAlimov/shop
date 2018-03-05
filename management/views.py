@@ -1,45 +1,24 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic.edit import FormView
 from management.forms import *
 from products.models import *
-from django.views import View
+
 
 # Create your views here.
-
-# class FileFieldView(FormView):
-#     form_class = UploadImageForm
-#     template_name = 'management.html'  # Replace with your template.
-#     success_url = 'goods/goods_adding'  # Replace with your URL or reverse().
-#
-#     def post(self, request, *args, **kwargs):
-#         form_class = self.get_form_class()
-#         form = self.get_form(form_class)
-#         files = request.FILES.getlist('file_field')
-#         print('form')
-#         if form.is_valid():
-#             for f in files:
-#
-#                 form.save()# Do something with each file.
-#             return self.form_valid(form)
-#         else:
-#             return self.form_invalid(form)
 
 
 def goods_adding(request):
     form = UploadImageForm(request.POST, request.FILES)
     if form.is_valid():
-        print('Есть форма')
-        form.save()
+        for image_list in request.FILES.getlist('product_image'):
+            image_load = Image(product_image=image_list)
+            print(image_load)
+            image_load.save()
     else:
         print('Пусто')
 
-    # return_dict = dict()
     data = request.POST
-    print(data)
 
-    data = request.POST
-    print('Добавление товара')
     name_of_goods = data.get('name_of_goods')
     price = data.get('price')
     goods_description = data.get('goods_description')
@@ -47,10 +26,10 @@ def goods_adding(request):
     choice_category = data.get('category')
     currency = data.get('currency')
     quantity = data.get('quantity')
-    dsg = Product(name_of_product=name_of_goods, price=price, short_description=goods_short_description,
-                  description=goods_description, category=choice_category, currency=currency, quantity=quantity)
+    goods_load = Product(name_of_product=name_of_goods, price=price, short_description=goods_short_description,
+                         description=goods_description, category=choice_category, currency=currency, quantity=quantity)
 
-    dsg.save()
+    goods_load.save()
     return JsonResponse(data)
 
 

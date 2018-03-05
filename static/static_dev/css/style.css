@@ -121,3 +121,24 @@ html, body {
     height: auto;
     width: 0;
   }
+
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+
+#btn_good_send{
+    position: absolute;
+    margin-top: 1%;
+}
+
+.list_img{
+    margin-top: 13%;
+    width: 100%;
+    position: absolute;
+}
+
+#close{
+    margin-top: 9%;
+}

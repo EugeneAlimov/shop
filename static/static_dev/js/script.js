@@ -117,17 +117,44 @@ $(document).on('submit', '#form-goods-adding', function (e) {
 
     var formData = new FormData($('#form-goods-adding')[0]);
     console.log($('#form-goods-adding')[0])
-//    var category = $("#category").val();
-//    formData.append("category", category);
-//    var category = $("#currency").val();
-//    formData.append("currency", category);
-//    var category = $("#quantity").val();
-//    formData.append("quantity", category);
-
-
+    var category = $("#category").val();
+    formData.append("category", category);
+    var category = $("#currency").val();
+    formData.append("currency", category);
+    var category = $("#quantity").val();
+    formData.append("quantity", category);
     var url = $('#form-goods-adding').attr("action");
 
-    console.log(formData);
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('')
+          document.getElementById('list').insertBefore(span, null);
+
+        };
+
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
 
     $.ajax({
         url: url,
@@ -139,6 +166,7 @@ $(document).on('submit', '#form-goods-adding', function (e) {
         .done(function () {
             console.log("success");
             $('#form-goods-adding')[0].reset();
+            $('#list').html("");
 
         })
         .fail(function () {
@@ -151,36 +179,65 @@ $(document).on('submit', '#form-goods-adding', function (e) {
 
 
 
-//$(document).on('submit', '#form-goods-adding', function (e) {
-//    e.preventDefault();
-//    var form = $('#form-goods-adding');
-//    var url = form.attr("action");
-//    var data = $('#form-goods-adding').serialize();
-//    $.ajax({
-//        url: url,
-//        type: 'POST',
-//        data: data
-//    })
-//        .done(function () {
-//            console.log("success");
-//            $('#form-goods-adding')[0].reset();
-//        })
-//        .fail(function () {
-//            console.log("error");
-//        })
-//        .always(function () {
+//function previewFile() {
+//  var preview = document.querySelector('img');
+//  var file    = document.querySelector('input[type=file]').files[0];
+//  var reader  = new FileReader();
+//  console.log(file)
 //
-//        });
-//});
+//  reader.onloadend = function () {
+//    preview.src = reader.result;
+//  }
+//
+//  if (file) {
+//    reader.readAsDataURL(file);
+//  } else {
+//    preview.src = "";
+//  }
+//}
 
 
+
+
+
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    console.log(files)
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('inputGroupFile').addEventListener('change', handleFileSelect, false);
 
 $(document).on('submit', '#form-category-adding', function (e) {
     e.preventDefault();
     var form = $('#form-category-adding');
     var url = form.attr("action");
     var data = $('#form-category-adding').serialize();
-//     cat_data.csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+
     $.ajax({
         url: url,
         type: 'POST',
@@ -223,21 +280,3 @@ $(function () {
         $("#quantity:first-child").val($(this).text());
     });
 });
-
-
-
-//function previewFile() {
-//  var preview = document.querySelector('img');
-//  var file    = document.querySelector('input[type=file]').files[0];
-//  var reader  = new FileReader();
-//
-//  reader.onloadend = function () {
-//    preview.src = reader.result;
-//  }
-//
-//  if (file) {
-//    reader.readAsDataURL(file);
-//  } else {
-//    preview.src = "";
-//  }
-//}
