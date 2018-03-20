@@ -15,13 +15,10 @@ Including another URLconf
 """
 
 from django.urls import path
-
-from management.views import BasicUploadView
 from . import views
 
 urlpatterns = [
     path('', views.management, name='management'),
     path('goods', views.goods_adding, name='goods_adding'),
-    path('photos', BasicUploadView.as_view, name='photo_adding'),
     path('category', views.category_adding, name='category_adding'),
 ]
