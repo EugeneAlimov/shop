@@ -162,12 +162,21 @@ padding: 0;
 
 #uploadImagesList .item .close {
     cursor: pointer;
-    display: block;
+    /*display: block;*/
 }
 
 .clear {
     clear: both;
 }
+
+.item template {
+    display: flex;
+    align-items: center;
+}
+
+/*#close {*/
+
+/*}*/
 
 #progress-bar {
     margin-top: 20px;
