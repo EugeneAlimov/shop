@@ -115,30 +115,53 @@ $('#mask').click(function () {
 $(document).on('submit', '#form-goods-adding', function (e) {
     e.preventDefault();
 
+
     var formData = new FormData($('#form-goods-adding')[0]);
     console.log($('#form-goods-adding')[0])
-//    var category = $("#category").val();
-//    formData.append("category", category);
-//    var category = $("#currency").val();
-//    formData.append("currency", category);
-//    var category = $("#quantity").val();
-//    formData.append("quantity", category);
-
-
+    var category = $("#category").val();
+    formData.append("category", category);
+    var category = $("#currency").val();
+    formData.append("currency", category);
+    var category = $("#quantity").val();
+    formData.append("quantity", category);
     var url = $('#form-goods-adding').attr("action");
 
-    console.log(formData);
 
     $.ajax({
         url: url,
         data: formData,
         type: 'POST',
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            var progressBar = $('#progress-bar'),
+                progressBg = progressBar.find('.progress-bg'),
+                progressVal = progressBar.find('.progress-val');
+
+            // Upload progress
+            xhr.upload.addEventListener("progress", function(evt){
+                if (evt.lengthComputable) {
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = (percentComplete * 100).toFixed();
+
+                    progressBg.css('width', percentComplete + '%');
+                    progressVal.text(percentComplete + '%');
+
+                    // console.log(percentComplete);
+                }
+            }, false);
+
+            return xhr;
+        },
+
         contentType: false,
         processData: false
+
     })
         .done(function () {
             console.log("success");
             $('#form-goods-adding')[0].reset();
+            $('#list').html("");
+            $('#uploadImagesList').html("");
 
         })
         .fail(function () {
@@ -150,29 +173,102 @@ $(document).on('submit', '#form-goods-adding', function (e) {
 });
 
 
+ jQuery(document).ready(function ($) {
 
-//$(document).on('submit', '#form-goods-adding', function (e) {
-//    e.preventDefault();
-//    var form = $('#form-goods-adding');
-//    var url = form.attr("action");
-//    var data = $('#form-goods-adding').serialize();
-//    $.ajax({
-//        url: url,
-//        type: 'POST',
-//        data: data
-//    })
-//        .done(function () {
-//            console.log("success");
-//            $('#form-goods-adding')[0].reset();
-//        })
-//        .fail(function () {
-//            console.log("error");
-//        })
-//        .always(function () {
+     var maxFileSize = 2 * 1024 * 1024; // (байт) Максимальный размер файла (2мб)
+     var queue = {};
+     var form = $('form#form-goods-adding');
+     var imagesList = $('#uploadImagesList');
+
+     var itemPreviewTemplate = imagesList.find('.item.template').clone();
+     itemPreviewTemplate.removeClass('template');
+     imagesList.find('.item.template').remove();
+
+
+     $('#inputGroupFile').on('change', function () {
+         var files = this.files;
+
+
+
+         for (var i = 0; i < files.length; i++) {
+             var file = files[i];
+
+
+             if ( !file.type.match(/image\/(jpeg|jpg|png|gif)/) ) {
+                 alert( 'Фотография должна быть в формате jpg, png или gif' );
+                 continue;
+             }
+
+             if ( file.size > maxFileSize ) {
+                 alert( 'Размер фотографии не должен превышать 2 Мб' );
+                 continue;
+             }
+
+             var filesNameList = file.name
+             console.log(filesNameList)
+             preview(files[i]);
+
+         }
+
+
+     });
+
+     // Создание превью
+     function preview(file) {
+         var reader = new FileReader();
+         reader.addEventListener('load', function(event) {
+             var img = document.createElement('img');
+
+             var itemPreview = itemPreviewTemplate.clone();
+
+             itemPreview.find('.img-wrap img').attr('src', event.target.result);
+             itemPreview.data('id', file.name);
+
+             imagesList.append(itemPreview);
+
+             queue[file.name] = file;
+
+         });
+         reader.readAsDataURL(file);
+     }
+
+     // Удаление фотографий
+     imagesList.on('click', '.close', function () {
+         var item = $(this).closest('.item'),
+             id = item.data('id');
+
+         delete queue[id];
+
+         item.remove();
+     });
+
+
+//     // Отправка формы
+//     form.on('submit', function(event) {
 //
-//        });
-//});
+//         var formData = new FormData(this);
+//
+//         for (var id in queue) {
+//             formData.append('images[]', queue[id]);
+//         }
+//
+//         $.ajax({
+//             url: $(this).attr('action'),
+//             type: 'POST',
+//             data: formData,
+//             async: true,
+//             success: function (res) {
+//                 alert(res)
+//             },
+//             cache: false,
+//             contentType: false,
+//             processData: false
+//         });
+//
+//         return false;
+//     });
 
+ });
 
 
 $(document).on('submit', '#form-category-adding', function (e) {
@@ -180,7 +276,7 @@ $(document).on('submit', '#form-category-adding', function (e) {
     var form = $('#form-category-adding');
     var url = form.attr("action");
     var data = $('#form-category-adding').serialize();
-//     cat_data.csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+
     $.ajax({
         url: url,
         type: 'POST',
@@ -223,21 +319,3 @@ $(function () {
         $("#quantity:first-child").val($(this).text());
     });
 });
-
-
-
-//function previewFile() {
-//  var preview = document.querySelector('img');
-//  var file    = document.querySelector('input[type=file]').files[0];
-//  var reader  = new FileReader();
-//
-//  reader.onloadend = function () {
-//    preview.src = reader.result;
-//  }
-//
-//  if (file) {
-//    reader.readAsDataURL(file);
-//  } else {
-//    preview.src = "";
-//  }
-//}

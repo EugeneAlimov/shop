@@ -121,3 +121,70 @@ html, body {
     height: auto;
     width: 0;
   }
+
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+
+#btn_good_send{
+    position: absolute;
+    margin-top: 1%;
+}
+
+.list_img{
+    margin-top: 13%;
+    width: 100%;
+    position: absolute;
+}
+
+#uploadImagesList {
+list-style: none;
+padding: 0;
+}
+
+#uploadImagesList .item {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+#uploadImagesList .item .img-wrap {
+    width: inherit;
+    display: block;
+    height: 150px;
+}
+
+#uploadImagesList .item .img-wrap img{
+    width: auto;
+    height: inherit;
+}
+
+#uploadImagesList .item .close {
+    cursor: pointer;
+    display: block;
+}
+
+.clear {
+    clear: both;
+}
+
+#progress-bar {
+    margin-top: 20px;
+    width: 300px;
+    height: 20px;
+    background: #999999;
+    position: relative;
+}
+#progress-bar .progress-bg {
+    position: absolute;
+    width: 0;
+    height: inherit;
+    background: green;
+}
+#progress-bar .progress-val {
+    position: absolute;
+    text-align: center;
+    width: inherit;
+    height: inherit;
+}
