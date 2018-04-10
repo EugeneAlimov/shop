@@ -67,7 +67,7 @@
                 </button>
                 <div class="dropdown-menu" id="category_drop">
                     {% for category in name_category_list %}
-                    <a class="dropdown-item">{{ category.name_of_category }}</a>
+                    <a href="#" class="dropdown-item">{{ category.name_category }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -82,9 +82,9 @@
                         <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" id="currency">Валюта
                         </button>
-                        <div class="dropdown-menu currency" id="currensy_drop">
+                        <div href="#" class="dropdown-menu currency" id="currensy_drop">
                             {% for currency in name_currency_list %}
-                            <a class="dropdown-item">{{ currency.currency }}</a>
+                            <a href="#" class="dropdown-item">{{ currency.currency }}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -95,8 +95,8 @@
                                 aria-haspopup="true" aria-expanded="false" id="quantity">Количество
                         </button>
                         <div class="dropdown-menu" id="quantity_drop">
-                            {% for quantity in rate_of_loss_list %}
-                            <a class="dropdown-item">{{ quantity.quantity }}</a>
+                            {% for quantity in name_quantity_list %}
+                            <a href="#" class="dropdown-item">{{ quantity.quantity }}</a>
                             {% endfor %}
                         </div>
                     </div>

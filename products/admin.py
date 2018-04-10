@@ -5,22 +5,15 @@ from products.models import *
 # Register your models here
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductCategory._meta.fields]
-    list_display_links = ['name_of_category']
+    list_display_links = ['name_category']
 
 
 admin.site.register(ProductCategory, ProductCategoryAdmin)
 
 
-class StatusAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Status._meta.fields]
-
-
-admin.site.register(Status, StatusAdmin)
-
-
 class ProductAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Product._meta.fields]
-    list_display_links = ['name_of_product']
+    list_display_links = ['name_of_goods']
 
 
 admin.site.register(Product, ProductAdmin)
@@ -32,6 +25,14 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Image, ImageAdmin)
+
+
+class OptionsAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Options._meta.fields]
+    list_display_links = ['goods_options']
+
+
+admin.site.register(Options, OptionsAdmin)
 
 
 class QuantityAdmin(admin.ModelAdmin):

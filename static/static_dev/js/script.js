@@ -20,7 +20,7 @@ $(document).on('submit', '#form-goods-adding', function (e) {
     formData.append("quantity", quantity);
     formData.delete("product_image");
 
-    for (var x = 0; x < uniqFileList.length; x++){
+    for (var x = 0; x < uniqFileList.length; x++) {
         formData.append("product_image", uniqFileList[x])
     }
 
@@ -30,23 +30,23 @@ $(document).on('submit', '#form-goods-adding', function (e) {
         url: url,
         data: formData,
         type: 'POST',
-        xhr: function() {
+        xhr: function () {
             var xhr = new window.XMLHttpRequest();
             var progressBar = $('#progress-bar'),
                 progressBg = progressBar.find('.progress-bg'),
                 progressVal = progressBar.find('.progress-val');
 
             // Upload progress
-            xhr.upload.addEventListener("progress", function(evt){
-                if (evt.lengthComputable) {
-                    var percentComplete = evt.loaded / evt.total;
-                    percentComplete = (percentComplete * 100).toFixed();
+            xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        percentComplete = (percentComplete * 100).toFixed();
 
-                    progressBg.css('width', percentComplete + '%');
-                    progressVal.text(percentComplete + '%');
+                        progressBg.css('width', percentComplete + '%');
+                        progressVal.text(percentComplete + '%');
 
-                }
-            },
+                    }
+                },
                 false);
             return xhr;
         },
@@ -73,78 +73,78 @@ $(document).on('submit', '#form-goods-adding', function (e) {
         });
 });
 
- jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
 
-     var maxFileSize = 2 * 1024 * 1024; // (байт) Максимальный размер файла (2мб)
-     var imagesList = $('#uploadImagesList');
-     var itemPreviewTemplate = imagesList.find('.item.template').clone();
-     itemPreviewTemplate.removeClass('template');
-     imagesList.find('.item.template').remove();
+    var maxFileSize = 2 * 1024 * 1024; // (байт) Максимальный размер файла (2мб)
+    var imagesList = $('#uploadImagesList');
+    var itemPreviewTemplate = imagesList.find('.item.template').clone();
+    itemPreviewTemplate.removeClass('template');
+    imagesList.find('.item.template').remove();
 
-     $('#inputGroupFile').on('change', function () {
-          var files = this.files;
+    $('#inputGroupFile').on('change', function () {
+        var files = this.files;
 
-         for (var i = 0; i < files.length; i++) {
-             var file = files[i];
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
 
-             if ( !file.type.match(/image\/(jpeg|jpg|png|gif)/) ) {
-                 alert( 'Фотография должна быть в формате jpg, png или gif' );
-                 continue;
-             }
+            if (!file.type.match(/image\/(jpeg|jpg|png|gif)/)) {
+                alert('Фотография должна быть в формате jpg, png или gif');
+                continue;
+            }
 
-             if ( file.size > maxFileSize ) {
-                 alert( 'Размер фотографии не должен превышать 2 Мб' );
-                 continue;
-             }
+            if (file.size > maxFileSize) {
+                alert('Размер фотографии не должен превышать 2 Мб');
+                continue;
+            }
 
-             createFileList(file);
-         }
+            createFileList(file);
+        }
 
 
-         fileList.filter(function (file) {
-             if (arrFilterByName.indexOf(file['name']) === -1) {
+        fileList.filter(function (file) {
+            if (arrFilterByName.indexOf(file['name']) === -1) {
                 arrFilterByName.push(file['name']);
                 uniqFileList.push(file);
-             return true
-             }
-             else {
-                 return false
-             }
-         });
+                return true
+            }
+            else {
+                return false
+            }
+        });
 
-         imagesList.html("");
+        imagesList.html("");
 
-         for (var k = 0; k < uniqFileList.length; k++) {
-             preview(uniqFileList[k]);
-         }
+        for (var k = 0; k < uniqFileList.length; k++) {
+            preview(uniqFileList[k]);
+        }
 
 
-     });
+    });
 
-     // Создание превью
-     function preview(file) {
-         var reader = new FileReader();
-         reader.addEventListener('load', function(event) {
-             var itemPreview = itemPreviewTemplate.clone();
-             itemPreview.find('.img-wrap img').attr('src', event.target.result).attr('title', file.name);
-             imagesList.append(itemPreview);
-         });
-         reader.readAsDataURL(file);
-     }
+    // Создание превью
+    function preview(file) {
+        var reader = new FileReader();
+        reader.addEventListener('load', function (event) {
+            var itemPreview = itemPreviewTemplate.clone();
+            itemPreview.find('.img-wrap img').attr('src', event.target.result).attr('title', file.name);
+            imagesList.append(itemPreview);
+        });
+        reader.readAsDataURL(file);
+    }
 
-     // Удаление фотографий
-     imagesList.on('click', '.close', function () {
-         var item = $(this).closest('.item'),
-             id = item.data('id');
+    // Удаление фотографий
+    imagesList.on('click', '.close', function () {
+        var item = $(this).closest('.item'),
+            id = item.data('id');
 
-         item.remove();
-         var index = arrFilterByName.indexOf(id);
-         fileList.splice(index, 1);
-         uniqFileList.splice(index, 1);
-         arrFilterByName.splice(index, 1);
+        item.remove();
+        var index = arrFilterByName.indexOf(id);
+        fileList.splice(index, 1);
+        uniqFileList.splice(index, 1);
+        arrFilterByName.splice(index, 1);
 
-     });
- });
+    });
+});
 
 
 $(document).on('submit', '#form-category-adding', function (e) {

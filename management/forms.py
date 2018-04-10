@@ -6,4 +6,4 @@ class UploadImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['product_image']
-        thumbnail = forms.ImageField(label='Есть в наличии')
+        # thumbnail = forms.ImageField(label='Есть в наличии')
